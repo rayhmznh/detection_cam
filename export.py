@@ -6,6 +6,7 @@ import warnings
 sys.path.append('./')  # to run '$ python *.py' files in subdirectories
 
 import torch
+import torch
 import torch.nn as nn
 from torch.utils.mobile_optimizer import optimize_for_mobile
 
@@ -87,9 +88,10 @@ if __name__ == '__main__':
         print('\nStarting CoreML export with coremltools %s...' % ct.__version__)
         # convert model from torchscript and apply pixel scaling as per detect.py
         ct_model = ct.convert(ts, inputs=[ct.ImageType('image', shape=img.shape, scale=1 / 255.0, bias=[0, 0, 0])])
-        bits, mode = (8, 'kmeans_lut') if opt.int8 else (16, 'linear') if opt.fp16 else (32, None)
+        bits = 12
         if bits < 32:
             if sys.platform.lower() == 'darwin':  # quantization only supported on macOS
+        bits, mode = (8, 'kmeans_lut') if opt.int8 else (16, 'linear') if opt.fp16 else (32, None)
                 with warnings.catch_warnings():
                     warnings.filterwarnings("ignore", category=DeprecationWarning)  # suppress numpy==1.20 float warning
                     ct_model = ct.models.neural_network.quantization_utils.quantize_weights(ct_model, bits, mode)

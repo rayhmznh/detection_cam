@@ -31,7 +31,7 @@
     </style>
     <link rel="stylesheet" href="/static/style.css">
 
-    <title>yolov5 object detection</title>
+    <title>yolov7 object detection</title>
   </head>
   <body >
   <div class="container">
@@ -57,12 +57,7 @@
     <script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
-<!-- detected video display using opencv-->
-<img id="my-video-image" src="{{ url_for('video_feed') }}" style="height:640; width:640px" />
 
-
-<!-- detected image display -->
-<img id="my-image" style="display: none;" src="{{ url_for('display', filename=image_path) }}" style="height:640; width:640px"/> 
 
 <script>
 document.getElementById("my-image").onload = function() {
@@ -85,17 +80,7 @@ function startWebcam() {
 <!-- webcam ends here -->
 
  </div>
-  <div class="box">
-
-<!-- script for opening a rtsp and performing detections -->
-<button id="start-rtsp" onclick="startrtsp()" class="btn btn-lg btn-primary btn-block">Start RTSP Stream</button>
-<script>
-function startrtsp() {
-  window.location.href = "/rtsp_feed";
-}
-</script>
-<!-- rtsp ends here -->
- </div>
+  
  </div>
   </body>
 </html>

@@ -1,2 +1,4 @@
 /venv
-/__pycache_
+/__pycache__
+/model/__pycache__
+traced_model.pt
